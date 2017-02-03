@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<meta name="description" content="My carousel" />
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="scripts/slick/slick.css" />
+	<link rel="stylesheet" type="text/css" href="scripts/slick/slick-theme.css" />
+	<link rel="icon" type="image/x-icon" href="medias/favicon.ico" />
+	<title>My carousel</title>
+</head>
+
+<body>
+	<header>
+		<div id="carrousel">
+			<ul>
+				<li><img src="http://lorempixel.com/output/technics-q-c-700-200-7.jpg" /></li>
+				<li><img src="http://lorempixel.com/output/technics-q-c-700-200-9.jpg" /></li>
+				<li><img src="http://lorempixel.com/output/food-q-c-700-200-5.jpg" /></li>
+			</ul>
+			<a class="prev">&#10094;</a>
+			<a class="next">&#10095;</a>
+
+		</div>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+		<script>
+			$(document).ready(function() {
+				var $carrousel = $('#carrousel'),
+					$img = $('#carrousel img'),
+					indexImg = $img.length - 1,
+					i = 0,
+					$currentImg = $img.eq(i);
+				$img.css('display', 'none');
+				$currentImg.css('display', 'block');
+
+				// $carrousel.append('<div class="controls"> <span class="prev">precedent</span>	<span class="next">suivant</span> </div>');
+
+				$('.next').click(function() {
+					i++;
+					if (i <= indexImg) {
+						$img.css('display', 'none');
+						$currentImg.css('display', 'none');
+						$currentImg = $img.eq(i);
+						$currentImg.css('display', 'block');
+					} else {
+						i = indexImg;
+					}
+				});
+
+				$('.prev').click(function() {
+					i--;
+					if (i >= 0) {
+						$img.css('display', 'none');
+						$currentImg.css('display', 'none');
+						$currentImg = $img.eq(i);
+						$currentImg.css('display', 'block');
+					} else {
+						i = 0;
+					}
+				});
+
+				function slideImg() {
+					setTimeout(function() {
+
+						if (i < indexImg) {
+							i++;
+						} else {
+							i = 0;
+						}
+
+						$img.css('display', 'none');
+
+						$currentImg = $img.eq(i);
+						$currentImg.css('display', 'block');
+
+						slideImg();
+					}, 5000);
+				}
+
+				slideImg();
+
+			});
+		</script>
+
+
+	</header>
+	<main>
+	</main>
+
+	<footer>
+	</footer>
+
+</body>
+
+</html>
